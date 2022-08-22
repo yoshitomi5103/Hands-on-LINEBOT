@@ -25,7 +25,6 @@
 	"remoteUser": "node",
 	"features": {
 		"docker-in-docker": "latest",
-		"git": "latest",
 		"aws-cli": "latest"
 	}
 }
