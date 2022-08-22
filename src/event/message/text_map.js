@@ -5,7 +5,7 @@ const getUserProfile = (event, client) => client.getProfile(event.source.userId)
 export const messageMap = {
   こんにちは: () => ({
     type: 'text',
-    text: 'Hello, world',
+    text: 'こんにちは世界',
   }),
   複数メッセージ: () => ([
     {
