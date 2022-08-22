@@ -372,4 +372,72 @@ export const messageMap = {
     type: 'text',
     text: 'Good Morning!',
   }),
+  予定: () => ({
+    type: 'text',
+    text: '予定を知りたい曜日を選んでください',
+    quickReply: {
+      items: [
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '月曜日の予定',
+            label: '月曜日',
+          },
+        },
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '火曜日の予定',
+            label: '火曜日',
+          },
+        },
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '水曜日の予定',
+            label: '水曜日',
+          },
+        },
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '木曜日の予定',
+            label: '木曜日',
+          },
+        },
+        {
+          type: 'action',
+          action: {
+            type: 'message',
+            text: '金曜日の予定',
+            label: '金曜日',
+          },
+        },
+      ],
+    },
+  }),
+  月曜日の予定: () => ({
+    type: 'text',
+    text: '1. 力学\n2. 力学\n3. 力学\n4. 力学\n5. 微積分\n6. 微積分',
+  }),
+  火曜日の予定: () => ({
+    type: 'text',
+    text: '3. プログ0\n4. プログ0\n5. プログ0\n6. プログ0\n7. Eng2\n8. プログ0\n9. 経済学\n10. 経済学',
+  }),
+  水曜日の予定: () => ({
+    type: 'text',
+    text: '3. 微積分\n4. 微積分',
+  }),
+  木曜日の予定: () => ({
+    type: 'text',
+    text: '1. 力学\n2. 力学\n3. 力学\n4. 力学\n5. 微積分\n6. 微積分\n7. 体育実技\n8. 体育実技',
+  }),
+  金曜日の予定: () => ({
+    type: 'text',
+    text: '3. プログ0\n4. プログ0\n5. プログ0\n6. プログ0\n7. Eng2\n8. プログ0\n9. 経済学\n10. 経済学',
+  }),
 };
