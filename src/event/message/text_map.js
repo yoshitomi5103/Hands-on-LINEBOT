@@ -368,4 +368,8 @@ export const messageMap = {
     type: 'text',
     text: `ここは${event.source.type}だよ！`,
   }),
+  おはよう: () => ({
+    type: 'text',
+    text: 'Good Morning!',
+  }),
 };
