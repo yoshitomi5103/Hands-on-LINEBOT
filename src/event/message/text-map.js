@@ -644,4 +644,13 @@ export const messageMap = {
       text: '検索したい本のISBNを送ってください\n※本のISBNは「検索したい本のタイトル ISBN」などとGoogleで検索すれば取得できます',
     };
   },
+  蔵書検索2: async (event, appContext) => {
+    // DBにコンテキストを追加
+    await createData(event.source.userId, 'context', 'bookSearchMode2', appContext);
+
+    return {
+      type: 'text',
+      text: '検索したい本のISBNを送ってください\n※本のISBNは「検索したい本のタイトル ISBN」などとGoogleで検索すれば取得できます',
+    };
+  },
 };
