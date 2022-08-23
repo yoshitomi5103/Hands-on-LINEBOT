@@ -51,11 +51,130 @@ const contextMap = {
       const bookReserveUrl = checkAPIResponse.books[isbn].Univ_Aizu.reserveurl.replace('libeopsv', 'libopsv');
       // カリールのリンクを作成
       const calilUrl = `https://calil.jp/book/${isbn}`;
+      const openBDResponse = (await get(`https://api.openbd.jp/v1/get?isbn=${isbn}`)).data;
+      const bookInfo = openBDResponse[0].summary;
 
       // メッセージを返信
       return {
-        type: 'text',
-        text: `本の状態: ${bookStatus}\n予約ページ: ${bookReserveUrl}\nカリール: ${calilUrl}`,
+        type: 'flex',
+        altText: 'Flex Message',
+        contents: {
+          type: 'bubble',
+          header: {
+            type: 'box',
+            layout: 'vertical',
+            contents: [
+              {
+                type: 'text',
+                text: bookStatus,
+                color: '#FFFFFF',
+                weight: 'bold',
+                size: '3xl',
+              },
+            ],
+          },
+          hero: {
+            type: 'image',
+            url: bookInfo.cover,
+            size: 'xl',
+            margin: 'none',
+          },
+          body: {
+            type: 'box',
+            layout: 'vertical',
+            contents: [
+              {
+                type: 'box',
+                layout: 'vertical',
+                contents: [
+                  {
+                    type: 'text',
+                    text: bookInfo.title,
+                    size: 'md',
+                    weight: 'bold',
+                    align: 'center',
+                    wrap: true,
+                  },
+                  {
+                    type: 'separator',
+                    margin: 'md',
+                  },
+                  {
+                    type: 'text',
+                    text: '【著者情報】',
+                    size: 'sm',
+                    margin: 'md',
+                  },
+                  {
+                    type: 'text',
+                    text: bookInfo.author,
+                    align: 'start',
+                    size: 'sm',
+                    wrap: true,
+                    margin: 'none',
+                  },
+                  {
+                    type: 'text',
+                    text: '【出版社】',
+                    size: 'sm',
+                    margin: 'md',
+                  },
+                  {
+                    type: 'text',
+                    text: bookInfo.publisher,
+                    align: 'start',
+                    size: 'sm',
+                    wrap: true,
+                    offsetBottom: 'none',
+                  },
+                ],
+                paddingBottom: 'md',
+                paddingTop: 'none',
+              },
+              {
+                type: 'separator',
+                margin: 'none',
+              },
+              {
+                type: 'box',
+                layout: 'vertical',
+                contents: [
+                  {
+                    type: 'button',
+                    action: {
+                      type: 'uri',
+                      label: '予約ページ',
+                      uri: bookReserveUrl,
+                    },
+                    style: 'primary',
+                    offsetBottom: '10px',
+                    color: '#3cb371',
+                  },
+                  {
+                    type: 'button',
+                    action: {
+                      type: 'uri',
+                      label: '本の情報(カリール)',
+                      uri: calilUrl,
+                    },
+                    style: 'primary',
+                    color: '#3cb371',
+                  },
+                ],
+                paddingTop: 'xxl',
+              },
+            ],
+          },
+          styles: {
+            header: {
+              // 貸出中かそうじゃないかでヘッダーの背景色が変わるようにしています
+              backgroundColor: bookStatus === '貸出中' ? '#ff0000' : '#008000',
+            },
+            hero: {
+              separator: false,
+            },
+          },
+        },
       };
     } catch (e) {
       error(e);
