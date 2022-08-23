@@ -2,6 +2,7 @@ import {
   createData, deleteData, readData, updateData,
 } from '../../crud.js';
 import { get } from '../../request.js';
+import { error } from '../../log.js';
 
 // ユーザーのプロフィールを取得する関数
 const getUserProfile = (event, client) => client.getProfile(event.source.userId);
@@ -458,6 +459,37 @@ export const messageMap = {
     ${weatherApiRes[0].timeSeries[0].timeDefines[2]}: ${weatherApiRes[0].timeSeries[0].areas[2].weathers[2]} 
     `,
     };
+  },
+  ニュース1: async () => {
+    // ニュースAPIのレスポンスを格納する変数を宣言
+    let newsApiRes;
+    // エラーハンドリング
+    try {
+      // APIのレスポンスをnewsApiResに格納
+      newsApiRes = (await get(`https://newsapi.org/v2/top-headlines?country=jp&apiKey=${process.env.NEWS_API_KEY}&pageSize=5`)).data;
+    } catch (e) {
+      error(`news API error: ${error}`);
+      return {
+        type: 'text',
+        text: 'ニュースAPIのリクエストでエラーが発生しました',
+      };
+    }
+    // 返信するメッセージの配列を用意
+    const message = [];
+
+    // newsApiRes.articlesを取り出す(分割代入という記法)
+    const { articles } = newsApiRes;
+    // articles(配列)の長さ分ループを回す
+    // 配列の要素がarticleに格納される
+    articles.forEach((article) => {
+      // 配列にメッセージを追加
+      message.push({
+        type: 'text',
+        text: `【画像URL】: ${article.urlToImage}\n【タイトル】: ${article.title}\n【公開日】: ${article.publishedAt}\n【概要】: ${article.description}\n【記事のURL】: ${article.url}\n【掲載元】: ${article.source.name}`,
+      });
+    });
+
+    return message;
   },
   Create: async (event, appContext) => {
     const date = new Date();
