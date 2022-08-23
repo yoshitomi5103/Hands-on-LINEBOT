@@ -6,8 +6,8 @@ import { joinHandler } from './event/join.js';
 import { leaveHandler } from './event/leave.js';
 import { followHandler } from './event/follow.js';
 import { unfollowHandler } from './event/unfollow.js';
-import { memberJoinedHandler } from './event/memberJoined.js';
-import { memberLeftHandler } from './event/memberLeft.js';
+import { memberJoinedHandler } from './event/member-joined.js';
+import { memberLeftHandler } from './event/member-left.js';
 import { error, log } from './log.js';
 import { hasKey } from './haskey.js';
 
