@@ -1,5 +1,5 @@
 import { hasKey } from '../../haskey.js';
-import { messageMap } from './text_map.js';
+import { messageMap } from './text-map.js';
 
 // テキストメッセージの処理をする関数
 export const textEvent = async (event, appContext) => {
