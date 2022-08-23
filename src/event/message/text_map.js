@@ -447,27 +447,89 @@ export const messageMap = {
       // APIのレスポンスをnewsApiResに格納
       newsApiRes = (await get(`https://newsapi.org/v2/top-headlines?country=jp&apiKey=${process.env.NEWS_API_KEY}&pageSize=5`)).data;
     } catch (e) {
-      error(`news API error: ${error}`);
+      error(`news API error: ${e}`);
       return {
         type: 'text',
         text: 'ニュースAPIのリクエストでエラーが発生しました',
       };
     }
-    // 返信するメッセージの配列を用意
-    const message = [];
+    // 返信するメッセージを作成
+    const message = {
+      type: 'flex',
+      altText: 'ニュース一覧',
+      contents: {
+        type: 'carousel',
+        // contentsはいったん空にしておく
+        contents: [],
+      },
+    };
 
     // newsApiRes.articlesを取り出す(分割代入という記法)
     const { articles } = newsApiRes;
     // articles(配列)の長さ分ループを回す
     // 配列の要素がarticleに格納される
     articles.forEach((article) => {
-      // 配列にメッセージを追加
-      message.push({
-        type: 'text',
-        text: `【画像URL】: ${article.urlToImage}\n【タイトル】: ${article.title}\n【公開日】: ${article.publishedAt}\n【概要】: ${article.description}\n【記事のURL】: ${article.url}\n【掲載元】: ${article.source.name}`,
-      });
+      // Carouselのcontentを作成
+      const content = {
+        type: 'bubble',
+        size: 'kilo',
+        hero: {
+          type: 'image',
+          // nullだったときはダミーのデータを挿入する(三項演算子という記法)
+          url: article.urlToImage === null ? 'https://raw.githubusercontent.com/shinbunbun/aizuhack-bot/master/media/imagemap.png' : article.urlToImage,
+          size: 'full',
+          aspectMode: 'cover',
+        },
+        body: {
+          type: 'box',
+          layout: 'vertical',
+          contents: [
+            {
+              type: 'text',
+              weight: 'bold',
+              size: 'sm',
+              wrap: true,
+              // nullだったときはダミーのデータを挿入する
+              text: article.title === null ? 'No title' : article.title,
+            },
+            {
+              type: 'text',
+              // nullだったときはダミーのデータを挿入する
+              text: article.publishedAt === null ? 'No publishedAt' : article.publishedAt,
+              size: 'xs',
+              color: '#a9a9a9',
+            },
+            {
+              type: 'text',
+              // nullだったときはダミーのデータを挿入する
+              text: article.description === null ? 'No description' : article.description.substring(0, 100),
+              size: 'sm',
+              wrap: true,
+            },
+          ],
+          spacing: 'md',
+        },
+        footer: {
+          type: 'box',
+          layout: 'vertical',
+          contents: [
+            {
+              type: 'button',
+              action: {
+                type: 'uri',
+                // nullだったときはダミーのデータを挿入する
+                uri: article.url === null ? 'https://example.com' : article.url,
+                // nullだったときはダミーのデータを挿入する
+                label: article.source.name === null ? 'No article source name' : article.source.name,
+              },
+              style: 'primary',
+            },
+          ],
+        },
+      };
+      // contents(配列)にcontentを追加
+      message.contents.contents.push(content);
     });
-
     return message;
   },
 };
