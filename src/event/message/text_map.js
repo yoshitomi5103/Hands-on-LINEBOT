@@ -417,4 +417,25 @@ export const messageMap = {
       text: 'データを削除しました',
     };
   },
+  メモ: async (event, appContext) => {
+    const memoData = await readData(event.source.userId, 'memo', appContext);
+    if (memoData.Items[0]) {
+      return {
+        type: 'text',
+        text: `メモには以下のメッセージが保存されています\n\n${memoData.Items[0].Data}`,
+      };
+    }
+
+    return {
+      type: 'text',
+      text: 'メモが存在しません',
+    };
+  },
+  メモ開始: async (event, appContext) => {
+    await createData(event.source.userId, 'context', 'memoMode', appContext);
+    return {
+      type: 'text',
+      text: 'メモモードを開始しました',
+    };
+  },
 };
