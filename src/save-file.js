@@ -28,7 +28,7 @@ export const saveContentFileToS3DownloadDir = ({
   const param = {
     Body: stream,
     Bucket: S3_BUCKET_NAME,
-    Key: `/download/${fileName}`,
+    Key: `download/${fileName}`,
     ContentType: contentType,
     ACL: 'private',
   };
