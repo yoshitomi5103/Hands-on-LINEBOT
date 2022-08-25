@@ -468,7 +468,7 @@ export const messageMap = {
       // APIのレスポンスをnewsApiResに格納
       newsApiRes = (await get(`https://newsapi.org/v2/top-headlines?country=jp&apiKey=${process.env.NEWS_API_KEY}&pageSize=5`)).data;
     } catch (e) {
-      error(`news API error: ${error}`);
+      error(`news API error: ${e}`);
       return {
         type: 'text',
         text: 'ニュースAPIのリクエストでエラーが発生しました',
