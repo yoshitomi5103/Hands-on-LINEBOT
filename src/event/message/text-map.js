@@ -65,13 +65,13 @@ export const messageMap = {
   音声メッセージ: () => ({
     type: 'audio',
     originalContentUrl:
-      'https://github.com/shinbunbun/aizuhack-bot/blob/master/media/demo.m4a?raw=true',
+      'https://github.com/shinbunbun/Hands-on-LINEBOT/blob/master/media/demo.m4a?raw=true',
     duration: 6000,
   }),
   動画メッセージ: () => ({
     type: 'video',
-    originalContentUrl: 'https://github.com/shinbunbun/aizuhack-bot/blob/master/media/demo.mp4?raw=true',
-    previewImageUrl: 'https://raw.githubusercontent.com/shinbunbun/aizuhack-bot/master/media/thumbnail.jpg?raw=true',
+    originalContentUrl: 'https://github.com/shinbunbun/Hands-on-LINEBOT/blob/master/media/demo.mp4?raw=true',
+    previewImageUrl: 'https://raw.githubusercontent.com/shinbunbun/Hands-on-LINEBOT/master/media/thumbnail.jpg?raw=true',
   }),
   位置情報メッセージ: () => ({
     type: 'location',
@@ -84,7 +84,7 @@ export const messageMap = {
     {
       type: 'imagemap',
       baseUrl:
-        'https://github.com/shinbunbun/aizuhack-bot/blob/master/media/imagemap.png?raw=true',
+        'https://github.com/shinbunbun/Hands-on-LINEBOT/blob/master/media/imagemap.png?raw=true',
       altText: 'This is an imagemap',
       baseSize: {
         width: 1686,
@@ -318,7 +318,7 @@ export const messageMap = {
           },
           {
             type: 'text',
-            text: '会津大学学部一年',
+            text: '会津大学学部二年',
             align: 'center',
           },
           {
