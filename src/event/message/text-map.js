@@ -312,7 +312,7 @@ export const messageMap = {
           },
           {
             type: 'text',
-            text: '会津大学学部一年',
+            text: '会津大学学部二年',
             align: 'center',
           },
           {
