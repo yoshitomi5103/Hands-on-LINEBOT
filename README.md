@@ -1,6 +1,6 @@
 # Hands-on LINEBot
 
-本リポジトリは技術書典13で頒布したHands-on LINEBOTのソースコードになります。
+本リポジトリは技術書典13で頒布した[Hands-on LINEBOT](https://techbookfest.org/product/3EUnJ5WbexvCDyMgSJS1qb)のソースコードになります。
 
 ## 補足記事
 
